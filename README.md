@@ -4,10 +4,10 @@ A REST API built with Node.js and Express that calculates the running average of
 
 ## Features
 
-- Submit numbers through a `POST /average` endpoint.
-- Calculate the running average of valid numbers.
-- Accept a JSON object or a raw numeric JSON value.
-- Validate input and handle malformed JSON.
+- Submit numbers using the `POST /average` endpoint.
+- Calculate the running average of submitted numbers.
+- Validate input and reject invalid values.
+- Handle malformed JSON requests.
 - Automated tests using Node.js Test Runner and Supertest.
 - Husky Git hooks to run tests before commits.
 - Commitlint to validate Conventional Commit messages.
@@ -23,7 +23,7 @@ A REST API built with Node.js and Express that calculates the running average of
 Clone the repository:
 
 ```bash
-git clone https://github.com/vennapusavasantha57/average-api.git
+git clone https://github.com/vennapusasantha57/average-api.git
 cd average-api
 ```
 
@@ -66,7 +66,7 @@ Example response:
 }
 ```
 
-You can also send a raw JSON number, such as `10`.
+The API also accepts a raw JSON number, such as `10`.
 
 Submit the numbers `10`, `20`, and `30` in sequence. The running averages will be `10`, `15`, and `20`.
 
@@ -78,13 +78,13 @@ Invalid or missing numbers and malformed JSON return HTTP `400 Bad Request`.
 npm test
 ```
 
-The automated tests verify running-average calculations, input validation, and error handling.
+The automated test suite covers average calculations, raw numeric input, decimal numbers, input validation, and malformed JSON.
 
 ## Git Hooks
 
 Husky runs the test suite before commits. Commitlint checks commit messages against the Conventional Commits format.
 
-Example:
+Examples of valid commit messages:
 
 ```text
 feat: add average endpoint
@@ -96,5 +96,3 @@ fix: handle invalid input
 ## License
 
 MIT
-```
-
