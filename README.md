@@ -85,7 +85,6 @@ The automated test suite covers average calculations, raw numeric input, decimal
 Husky runs the test suite before commits. Commitlint checks commit messages against the Conventional Commits format.
 
 Examples of valid commit messages:
-
 ```text
 feat: add average endpoint
 test: expand API test coverage
