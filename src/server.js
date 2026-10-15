@@ -17,8 +17,13 @@ function resetAverage() {
 }
 
 /**
- * Accepts a number and returns the average of all
- * valid numbers submitted since the server started.
+ * @route POST /average
+ * @summary Add a number and return the running average.
+ * @param {number|{number: number}} req.body
+ *        A number or an object containing a number.
+ * @returns {{average: number, count: number}}
+ *          The updated average and total number of valid inputs.
+ * @returns {{error: string}} 400 - Invalid input or malformed JSON.
  */
 app.post("/average", (req, res) => {
   const number =
