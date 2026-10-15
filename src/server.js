@@ -2,7 +2,9 @@
 const express = require("express");
 
 const app = express();
-app.use(express.json());
+
+// Accept JSON objects and primitive values, including numbers.
+app.use(express.json({ strict: false }));
 
 let sum = 0;
 let count = 0;
@@ -17,12 +19,13 @@ function resetAverage() {
 }
 
 /**
+ * Adds a number and returns the running average.
+ *
  * @route POST /average
- * @summary Add a number and return the running average.
  * @param {number|{number: number}} req.body
- *        A number or an object containing a number.
+ *        A raw JSON number or an object containing a number.
  * @returns {{average: number, count: number}}
- *          The updated average and total number of valid inputs.
+ *          The running average and number of valid inputs.
  * @returns {{error: string}} 400 - Invalid input or malformed JSON.
  */
 app.post("/average", (req, res) => {
@@ -38,19 +41,22 @@ app.post("/average", (req, res) => {
   }
 
   sum += number;
-  count++;
+  count += 1;
 
-  return res.json({
+  return res.status(200).json({
     average: sum / count,
     count
   });
 });
 
-// Return a clear error for malformed JSON.
+// Handle malformed JSON with a 400 response.
 app.use((err, req, res, next) => {
-  if (err instanceof SyntaxError && "body" in err) {
-    return res.status(400).json({ error: "Invalid JSON." });
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    return res.status(400).json({
+      error: "Invalid JSON."
+    });
   }
+
   return next(err);
 });
 
