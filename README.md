@@ -70,3 +70,7 @@ Submit 10, 20, and 30 in sequence. The running averages are 10, 15, and 20.
 ## License
 
 MIT
+
+Git hooks verified.
+
+Git hooks verified.
